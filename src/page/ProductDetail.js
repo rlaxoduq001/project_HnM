@@ -13,19 +13,13 @@ export const ProductDetail = () => {
 
   useEffect(() => {
     getProductDetail();
-    console.log(product);
   },[]);
 
-  useEffect(() => {
-    console.log(product);
-  },[product]);
-  
   const getProductDetail = async () => {
     let url = `http://localhost:3004/products/${id}`;
     let response = await fetch(url);
     let data = await response.json();
     setProduct(data);
-    console.log(product);
   }
   
   const containerStyle = {
