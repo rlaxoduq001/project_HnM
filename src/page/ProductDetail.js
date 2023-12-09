@@ -11,6 +11,7 @@ export const ProductDetail = () => {
   let {id} = useParams();
   const [product, setProduct] = useState(null);
 
+  
   useEffect(() => {
     getProductDetail();
   },[]);
