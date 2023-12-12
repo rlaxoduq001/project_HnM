@@ -12,10 +12,11 @@ import { useSelector } from 'react-redux';
 export const ProductDetail = () => {
 
   let {id} = useParams();
+
   // const [product, setProduct] = useState(null);
   const dispatch = useDispatch();
   const product = useSelector((state)=>state.product.selectedItem);
- 
+
   useEffect(() => {
     getProductDetail();
   },[]);
