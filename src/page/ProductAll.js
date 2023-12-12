@@ -4,21 +4,20 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useSearchParams } from 'react-router-dom';
+import { productAction } from '../redux/actions/productAction';
+import { useDispatch,useSelector } from 'react-redux';
 
 export const ProductAll = () => {
     
-    const [productList,setProductList] = useState([]);
     const [query, setQuery] = useSearchParams();
+    const dispatch = useDispatch();
+    const productList = useSelector((state)=>state.product.productList);
 
-    const getProducts = async () => {
+    const getProducts = () => {
         let searchQuery = query.get('q') || "";
-
-        let url = `http://localhost:3004/products?q=${searchQuery}`;
-        let response = await fetch(url)
-        let data = await response.json();
-        setProductList(data);
+        dispatch(productAction.getProducts(searchQuery));
     }
- 
+
     useEffect(()=>{
         getProducts();
     },[query])
@@ -27,7 +26,7 @@ export const ProductAll = () => {
         <div>
             <Container>
                 <Row>
-                    {productList.map((menu) => (
+                    {productList && productList.map((menu) => (
                         <Col key={menu.id} lg={3}>
                             <ProductCard item={menu} />
                         </Col>
